@@ -67,8 +67,9 @@ order by dea.location,dea.date
 
 --to find daily no. of  vaccinations and daily reading of totaal vaccinated population, CTE is used
 
-
-;with PopnvsVacn(population,location,continent,date,new_vaccinations,DailyVaccinations)
+Select *,(DailyVaccinations/population)*100 as PercentVaccinated
+from PopnvsVacn
+with PopnvsVacn(population,location,continent,date,new_vaccinations,DailyVaccinations)
 AS
 (
 Select distinct dea.population,dea.location,dea.continent,dea.date,vac.new_vaccinations
@@ -81,8 +82,7 @@ join [portfolio project]..covid_vaccination$ vac
 	where dea.continent is not null 
 	--order by dea.CONTINENT
 )
-Select *,(DailyVaccinations/population)*100 as PercentVaccinated
-from PopnvsVacn
+
 
 
 
